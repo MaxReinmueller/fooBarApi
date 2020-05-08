@@ -21,8 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// mongoose
-mongoose.connect('mongodb://localhost/reactreadinglist', {useNewUrlParser: true});
+var mong = process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
+
+mongoose.connect(mong, {useNewUrlParser: true});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
